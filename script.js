@@ -90,8 +90,23 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-
+  //variable to store user's input
+let passwordLength = window.prompt("How many characters would you like your password to contain?");
+if (passwordLength == "") {
+  alert("No value entered!");
+  return;
+} else if (isNaN(passwordLength)){
+  alert ("Please provide a number!")
+  return; 
+} else if (passwordLength < 8){
+  alert ("Password length must be at least 8 characters!")
+  return; 
+} else if (passwordLength > 128){
+  alert ("Password length must be less than 128 characters!")
+  return;
+} 
 }
+getPasswordOptions()
 
 // Function for getting a random element from an array
 function getRandom(arr) {
