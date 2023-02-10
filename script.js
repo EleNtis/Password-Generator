@@ -95,7 +95,10 @@ let passwordLength = window.prompt("How many characters would you like your pass
 if (passwordLength == "") {
   alert("No value entered!");
   return;
-} else if (isNaN(passwordLength)){
+} else if(passwordLength == null){
+return false;
+}
+else if (isNaN(passwordLength)){
   alert ("Please provide a number!")
   return; 
 } else if (passwordLength < 8){
@@ -105,6 +108,19 @@ if (passwordLength == "") {
   alert ("Password length must be less than 128 characters!")
   return;
 } 
+
+let upperCasedCharacters = confirm("Click OK to include upper cased characters")
+let lowerCasedCharacters = confirm ("Click OK to include lower cased characters")
+let numericCharacters = confirm ("Click OK to include numeric characters")
+let specialCharacters = confirm("Click OK to include special characters")
+
+if(upperCasedCharacters === false &&
+  lowerCasedCharacters === false &&
+  numericCharacters === false &&
+  specialCharacters === false) {
+    alert("Must select at least one character type!")
+    return;
+  } 
 }
 getPasswordOptions()
 
