@@ -151,27 +151,33 @@ function generatePassword() {
   let finalCharacter = []
   let possibleCharacter = []
 
-  if (passwordOptions.hasSpecialCharacters){
+  if (passwordOptions.hasSpecialCharacters) {
+    possibleCharacter = possibleCharacter.concat(specialCharacters);
     finalCharacter.push(getRandom(specialCharacters))
   }
   
+  
   if (passwordOptions.hasNumericCharacters){
+    possibleCharacter = possibleCharacter.concat(numericCharacters);
     finalCharacter.push(getRandom(numericCharacters))
   }
 
   if (passwordOptions.hasUpperCasedCharacters){
+    possibleCharacter = possibleCharacter.concat(upperCasedCharacters);
     finalCharacter.push(getRandom(upperCasedCharacters))
 
   if (passwordOptions.hasLowerCasedCharacters){
+    possibleCharacter = possibleCharacter.concat(lowerCasedCharacters);
     finalCharacter.push(getRandom(lowerCasedCharacters))
   }
 
   }
 
   for (let i = 0; i < passwordOptions.length; i++ ) {
-    let generated = (getRandom(finalCharacter));
+    var generated = getRandom(possibleCharacter);
     result.push(generated);
   }
+
   return result.join(" ");
  
 }
