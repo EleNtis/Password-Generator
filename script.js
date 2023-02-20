@@ -109,31 +109,73 @@ else if (isNaN(passwordLength)){
   return;
 } 
 
-let upperCasedCharacters = confirm("Click OK to include upper cased characters")
-let lowerCasedCharacters = confirm ("Click OK to include lower cased characters")
-let numericCharacters = confirm ("Click OK to include numeric characters")
-let specialCharacters = confirm("Click OK to include special characters")
+// Variables to store users' input for charachter types
+let uppCasedCharacters = confirm("Click OK to include upper cased characters")
+let lowCasedCharacters = confirm ("Click OK to include lower cased characters")
+let numCharacters = confirm ("Click OK to include numeric characters")
+let spCharacters = confirm("Click OK to include special characters")
 
-if(upperCasedCharacters === false &&
-  lowerCasedCharacters === false &&
-  numericCharacters === false &&
-  specialCharacters === false) {
+if(uppCasedCharacters === false &&
+  lowCasedCharacters === false &&
+  numCharacters === false &&
+  spCharacters === false) {
     alert("Must select at least one character type!")
     return;
   } 
+  
+  let passwordObject = {
+    length: passwordLength,
+    hasLowerCasedCharacters: lowCasedCharacters,
+    hasUpperCasedCharacters: uppCasedCharacters,
+    hasNumericCharacters: numCharacters,
+    hasSpecialCharacters: spCharacters
+  }
+  return passwordObject;
+  
 }
-getPasswordOptions()
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+let randomItem = Math.floor(Math.random() * arr.length)
+let randomItem2 = arr[randomItem];
+return randomItem2;
 }
+
 
 // Function to generate password with user input
 function generatePassword() {
   let passwordOptions = getPasswordOptions();
 
+  let result = []
+  let finalCharacter = []
+  let possibleCharacter = []
+
+  if (passwordOptions.hasSpecialCharacters){
+    finalCharacter.push(getRandom(specialCharacters))
+  }
+  
+  if (passwordOptions.hasNumericCharacters){
+    finalCharacter.push(getRandom(numericCharacters))
+  }
+
+  if (passwordOptions.hasUpperCasedCharacters){
+    finalCharacter.push(getRandom(upperCasedCharacters))
+
+  if (passwordOptions.hasLowerCasedCharacters){
+    finalCharacter.push(getRandom(lowerCasedCharacters))
+  }
+
+  }
+
+  for (let i = 0; i < passwordOptions.length; i++ ) {
+    let generated = (getRandom(finalCharacter));
+    result.push(generated);
+  }
+  return result.join(" ");
+ 
 }
+
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
